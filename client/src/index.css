@@ -7,12 +7,17 @@
   body {
     @apply bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark transition-colors duration-200;
   }
+
+  :root {
+    --primary-light: #3b82f6;
+    --primary-dark: #60a5fa;
+  }
 }
 
 @layer components {
   /* Custom component styles */
   .btn {
-    @apply px-4 py-2 rounded-md font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
+    @apply px-4 py-2 rounded-lg font-medium transition-all duration-200 flex items-center justify-center;
   }
   
   .btn-primary {
@@ -43,4 +48,101 @@
   .filter-btn-active {
     @apply bg-primary-light text-white dark:bg-primary-dark;
   }
+}
+
+@layer utilities {
+  /* Smooth animations for task items */
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+
+  .animate-slide-in {
+    animation: slideIn 0.3s ease-in-out;
+  }
+
+  /* Custom scrollbar */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-light) transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: var(--primary-light);
+    border-radius: 3px;
+  }
+
+  /* Dark mode scrollbar */
+  .dark .custom-scrollbar {
+    scrollbar-color: var(--primary-dark) transparent;
+  }
+
+  .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: var(--primary-dark);
+  }
+}
+
+/* Keyframes for animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Drag and drop animations */
+.task-dragging {
+  @apply shadow-lg scale-[1.02] z-50;
+}
+
+/* Task item hover effects */
+.task-item {
+  @apply transition-all duration-200;
+}
+
+.task-item:hover {
+  @apply transform -translate-y-0.5;
+}
+
+/* Task complete animation */
+.task-complete {
+  @apply transition-all duration-300;
+  text-decoration: line-through;
+  @apply text-gray-400 dark:text-gray-500;
+}
+
+/* Smooth transition for dark mode */
+.dark {
+  @apply transition-colors duration-200;
+}
+
+/* Loading spinner animation */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
 }
